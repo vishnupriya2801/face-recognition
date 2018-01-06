@@ -65,59 +65,7 @@ else:
 		img_data=np.rollaxis(img_data,3,1)
 		print (img_data.shape)
 		
-#%%
-USE_SKLEARN_PREPROCESSING=False
 
-if USE_SKLEARN_PREPROCESSING:
-	# using sklearn for preprocessing
-	from sklearn import preprocessing
-	
-	def image_to_feature_vector(image, size=(128, 128)):
-		# resize the image to a fixed size, then flatten the image into
-		# a list of raw pixel intensities
-		return cv2.resize(image, size).flatten()
-	
-	img_data_list=[]
-	for dataset in data_dir_list:
-		img_list=os.listdir(data_path+'/'+ dataset)
-		print ('Loaded the images of dataset-'+'{}\n'.format(dataset))
-		for img in img_list:
-			input_img=cv2.imread(data_path + '/'+ dataset + '/'+ img )
-			input_img=cv2.cvtColor(input_img, cv2.COLOR_BGR2GRAY)
-			input_img_flatten=image_to_feature_vector(input_img,(128,128))
-			img_data_list.append(input_img_flatten)
-	
-	img_data = np.array(img_data_list)
-	img_data = img_data.astype('float32')
-	print (img_data.shape)
-	img_data_scaled = preprocessing.scale(img_data)
-	print (img_data_scaled.shape)
-	
-	print (np.mean(img_data_scaled))
-	print (np.std(img_data_scaled))
-	
-	print (img_data_scaled.mean(axis=0))
-	print (img_data_scaled.std(axis=0))
-	
-	if K.image_dim_ordering()=='th':
-		img_data_scaled=img_data_scaled.reshape(img_data.shape[0],num_channel,img_rows,img_cols)
-		print (img_data_scaled.shape)
-		
-	else:
-		img_data_scaled=img_data_scaled.reshape(img_data.shape[0],img_rows,img_cols,num_channel)
-		print (img_data_scaled.shape)
-	
-	
-	if K.image_dim_ordering()=='th':
-		img_data_scaled=img_data_scaled.reshape(img_data.shape[0],num_channel,img_rows,img_cols)
-		print (img_data_scaled.shape)
-		
-	else:
-		img_data_scaled=img_data_scaled.reshape(img_data.shape[0],img_rows,img_cols,num_channel)
-		print (img_data_scaled.shape)
-
-if USE_SKLEARN_PREPROCESSING:
-	img_data=img_data_scaled
 #%%
 # Assigning Labels
 
