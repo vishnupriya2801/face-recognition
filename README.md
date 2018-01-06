@@ -1,3 +1,3 @@
-# Image-recognition-with-tensor-flow 
+# Face recognition
 
-Classifying images of the CIFAR-10 dataset using tensorflow in python
+Classifying images of the AT&T Fcaedataset using kers in python
